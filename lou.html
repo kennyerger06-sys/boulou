@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f7c6d9;
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      position: relative;
+      width: 350px;
+      min-height: 300px;
+    }
+
+    .emoji {
+      font-size: 60px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #ff4d88;
+      color: white;
+      margin-right: 20px;
+    }
+
+    #no {
+      background: #ddd;
+      position: absolute;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <div class="emoji">🐱💖</div>
+    <h2>tu veux etre ma Valentine boulouu?😑💗</h2>
+
+    <div id="buttons">
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
+
+    <div id="result" class="hidden">
+      <h1>YAY! 🎉</h1>
+      <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif">
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const card = document.getElementById("card");
+    const buttons = document.getElementById("buttons");
+    const result = document.getElementById("result");
+
+    // Bouton NO qui fuit
+    noBtn.addEventListener("mouseenter", () => {
+      const maxX = card.offsetWidth - noBtn.offsetWidth;
+      const maxY = card.offsetHeight - noBtn.offsetHeight;
+
+      noBtn.style.left = Math.random() * maxX + "px";
+      noBtn.style.top = Math.random() * maxY + "px";
+    });
+
+    // Clic sur YES
+    yesBtn.addEventListener("click", () => {
+      buttons.classList.add("hidden");
+      result.classList.remove("hidden");
+    });
+  </script>
+
+</body>
+</html>
