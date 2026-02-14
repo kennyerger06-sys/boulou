@@ -1,0 +1,81 @@
+body {
+  background: linear-gradient(135deg, #f6d1dc, #fff);
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,.15);
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  background: #d6336c;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.sub {
+  color: #777;
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.tile {
+  background: #f2f2f2;
+  border-radius: 12px;
+  height: 55px;
+  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.reason {
+  background: #f8f8f8;
+  border-radius: 15px;
+  padding: 12px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.reason span {
+  display: none;
+  font-size: 14px;
+  color: #555;
+}
+
+.reason.revealed span {
+  display: block;
+  margin-top: 6px;
+}
+
+.skip {
+  background: none;
+  border: none;
+  color: #b55;
+  font-size: 14px;
+}
