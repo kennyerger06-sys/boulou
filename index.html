@@ -1,162 +1,71 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pour boulouu🥺💗 ❤️</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle, #fff0f3 0%, #ffdde1 100%);
-            font-family: 'Segoe UI', sans-serif;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        /* --- Arrière-plan animé --- */
-        .hearts-container { position: fixed; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .bg-heart { position: absolute; color: rgba(255, 77, 109, 0.3); animation: float 6s infinite ease-in-out; }
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
-        }
-
-        /* --- Gestion des écrans --- */
-        .step { display: none; z-index: 10; flex-direction: column; align-items: center; }
-        .active { display: flex !important; }
-
-        /* --- Étape 1 : Enveloppe --- */
-        .env-text { color: #ff4d6d; font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-        .envelope { font-size: 120px; cursor: pointer; transition: transform 0.3s; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
-        .envelope:hover { transform: scale(1.1) rotate(5deg); }
-
-        /* --- Étape 2 : Questionnaire --- */
-        .card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.2);
-            border: 2px solid white;
-            width: 320px;
-        }
-        .card h3 { color: #ff4d6d; font-size: 1.8rem; margin: 20px 0; line-height: 1.2; }
-        .signature { font-style: italic; color: #ff8fa3; font-size: 0.9rem; }
-        
-        .btn-group { margin-top: 30px; height: 50px; position: relative; width: 100%; }
-        button {
-            padding: 12px 25px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        #yes-btn { background: #ff4d6d; color: white; width: 100px; }
-        #no-btn { background: #f8f9fa; color: #6c757d; position: fixed; z-index: 9999; }
-
-        /* --- Étape 3 : Le Hack --- */
-        #step3 { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #000; color: #ff0000; font-family: 'Courier New', monospace; 
-        }
-        .progress-container { width: 80%; height: 25px; border: 2px solid #ff0000; margin-top: 30px; }
-        .bar { width: 0%; height: 100%; background: #ff0000; transition: width 0.1s; }
-
-        /* --- Étape 4 : Final --- */
-        .final-box { background: white; padding: 50px; border-radius: 30px; animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .final-box h1 { color: #ff4d6d; font-size: 3rem; margin: 0; }
-        @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="hearts-container" id="hearts-bg"></div>
+<!-- ÉCRAN 0 : INTRO -->
+<div class="card" id="screen0">
+  <h1>Hi my love ❤️</h1>
+  <p>I made this just for you!</p>
+  <small>Play a little game to unlock your surprises</small>
+  <button onclick="goToGame()">Start Game</button>
+</div>
 
-    <div id="step1" class="step active">
-        <div class="env-text">💓 Pour boulouu <br> boulouu d'amourouu</div>
-        <div class="envelope" onclick="goToStep(2)">📩</div>
-        <p style="color: #ff4d6d;">Clique sur l'enveloppe stp</p>
-    </div>
+<!-- ÉCRAN 1 : MEMORY GAME -->
+<div class="card hidden" id="screen1">
+  <h2>Let's play a little game<br>before your surprise</h2>
+  <p class="sub">Tap two cards to find the matching pairs!</p>
+  <p class="moves">Moves: <span id="moves">0</span></p>
 
-    <div id="step2" class="step">
-        <div class="card">
-            <div class="signature">De kenny l'amour de ta vie 💗</div>
-            <h3 id="question">Veux-tu être ma Valentine ? 💝</h3>
-            <div class="btn-group">
-                <button id="yes-btn" onclick="goToStep(3)">Oui 💞</button>
-                <button id="no-btn" onmouseover="moveNo()">Non 😔</button>
-            </div>
-        </div>
-    </div>
+  <div class="grid" id="grid"></div>
 
-    <div id="step3" class="step">
-        <h1 style="font-size: 2.5rem;">MAINTENANT</h1>
-        <p>TRÈS BIEN JE VAIS TE HACKER MAINTENANT !</p>
-        <p>ALORS C'EST TANT PIS POUR TOI ! ⚠️</p>
-        <div class="progress-container"><div class="bar" id="bar"></div></div>
-        <p id="status" style="margin-top: 15px;">HACK PROGRESS: LOADING...</p>
-    </div>
+  <button class="skip" onclick="goToReasons()">Skip game →</button>
+</div>
 
-    <div id="step4" class="step">
-        <div class="final-box">
-            <h1>Jeee t'aimeeeee🥺❤️ ❤️</h1>
-            <p style="font-size: 1.2rem; color: #ff4d6d;">Tu as fait mon bonheur ! 💖</p>
-        </div>
-    </div>
+<!-- ÉCRAN 2 : REASONS -->
+<div class="card hidden" id="screen2">
+  <h2>Reasons Why I Love You</h2>
+  <p class="sub">Tap each heart to reveal one reason.</p>
 
-    <script>
-        // Création des coeurs en fond
-        const bg = document.getElementById('hearts-bg');
-        for(let i=0; i<20; i++) {
-            let h = document.createElement('div');
-            h.className = 'bg-heart';
-            h.innerHTML = '❤️';
-            h.style.left = Math.random() * 100 + 'vw';
-            h.style.animationDelay = Math.random() * 5 + 's';
-            h.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            bg.appendChild(h);
-        }
+  <div class="reason" onclick="reveal(this)">
+    ❤️ <strong>Your Dedication</strong>
+    <span>You never give up, even when things get hard.</span>
+  </div>
 
-        function goToStep(num) {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('step' + num).classList.add('active');
-            if(num === 3) startLoading();
-        }
+  <div class="reason" onclick="reveal(this)">
+    ❤️ <strong>Your Tenderness</strong>
+    <span>You make me feel loved every day.</span>
+  </div>
 
-        function moveNo() {
-            const btn = document.getElementById('no-btn');
-            const q = document.getElementById('question');
-            const phrases = ["Tu es sûre ? 😳", "Vraiment ? 🥺", "Réfléchis... 🧐", "Allez encore ! 😜", "Sérieusement ? 🤨"];
-            q.innerText = phrases[Math.floor(Math.random() * phrases.length)];
-            
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
-        }
+  <div class="reason" onclick="reveal(this)">
+    ❤️ <strong>Your Humor</strong>
+    <span>You always make me laugh.</span>
+  </div>
 
-        function startLoading() {
-            let width = 0;
-            const bar = document.getElementById('bar');
-            const status = document.getElementById('status');
-            const interval = setInterval(() => {
-                width += Math.random() * 10;
-                if(width >= 100) {
-                    width = 100;
-                    clearInterval(interval);
-                    setTimeout(() => goToStep(4), 500);
-                }
-                bar.style.width = width + '%';
-                status.innerText = "HACK PROGRESS: " + Math.floor(width) + "%";
-            }, 200);
-        }
-    </script>
+  <div class="reason" onclick="reveal(this)">
+    ❤️ <strong>Your Beauty</strong>
+    <span>Your soul is the most beautiful thing I’ve ever known.</span>
+  </div>
+
+  <div class="reason" onclick="reveal(this)">
+    ❤️ <strong>Your Heart</strong>
+    <span>The way you love is everything I want.</span>
+  </div>
+
+  <button onclick="goToLove()">Continue 💖</button>
+</div>
+
+<!-- ÉCRAN 3 : TEXTE D’AMOUR -->
+<div class="card hidden" id="screen3">
+  <h2>For You ❤️</h2>
+  <p id="loveText"></p>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
